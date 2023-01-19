@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/epos-eu/SHAPEness-Metadata-Editor:
+      branch: master
+      repo: https://github.com/epos-eu/SHAPEness-Metadata-Editor
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/epos-eu/SHAPEness-Metadata-Editor git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-cyan-sponge.sh
+        container: qc.acc_cozy-cerulean-kudu
+  QC.Doc:
+    repos:
+      github.com/epos-eu/SHAPEness-Metadata-Editor find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-cyan-akbash.sh
+        container: qc.doc_crabby-gamboge-snail
+      github.com/epos-eu/SHAPEness-Metadata-Editor git:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-orchid-okapi.sh
+        container: qc.doc_snappy-lavender-kudu
+      github.com/epos-eu/SHAPEness-Metadata-Editor markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-platinum-cougar.sh
+        container: qc.doc_frumpy-silver-eel
+  QC.Lic:
+    repos:
+      github.com/epos-eu/SHAPEness-Metadata-Editor licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-malachite-jellyfish.sh
+        container: qc.lic_breezy-thistle-zonkey
+  QC.Sty:
+    repos:
+      github.com/epos-eu/SHAPEness-Metadata-Editor checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-asparagus-javanese.sh
+        container: qc.sty_sickly-cerulean-deer
+  QC.Ver:
+    repos:
+      github.com/epos-eu/SHAPEness-Metadata-Editor get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-carmine-fox.sh
+        container: qc.ver_gloppy-cream-catfish
+timeout: 5400
